@@ -1,6 +1,6 @@
 integrator=md
 dt=0.002
-nsteps=50000000            ; 10 ns?50 ns=25e6?100 ns=50e6
+nsteps=50000000            ; 50ns
 tcoupl=V-rescale
 tc-grps=System
 tau-t=0.1
@@ -22,3 +22,4 @@ DispCorr=EnerPres
 nstxout-compressed=5000
 nstenergy=5000
 nstlog=5000
+
