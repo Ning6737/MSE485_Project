@@ -1,0 +1,21 @@
+UNITS LENGTH=nm TIME=ps
+
+na:   GROUP NDX_FILE=index_seed.ndx NDX_GROUP=NA
+cl:   GROUP NDX_FILE=index_seed.ndx NDX_GROUP=CL
+seed: GROUP NDX_FILE=index_seed.ndx NDX_GROUP=max_clust
+
+center: COM ATOMS=seed
+
+cn_na_Rgr: COORDINATIONNUMBER SPECIESA=center SPECIESB=na SWITCH={RATIONAL R_0=1.5 D_MAX=1.7} MEAN
+cn_cl_Rgr: COORDINATIONNUMBER SPECIESA=center SPECIESB=cl SWITCH={RATIONAL R_0=1.5 D_MAX=1.7} MEAN
+
+cn_na_Rcr: COORDINATIONNUMBER SPECIESA=center SPECIESB=na SWITCH={RATIONAL R_0=2.0 D_MAX=2.2} MEAN
+cn_cl_Rcr: COORDINATIONNUMBER SPECIESA=center SPECIESB=cl SWITCH={RATIONAL R_0=2.0 D_MAX=2.2} MEAN
+
+na_CR: COMBINE ARG=cn_na_Rcr.mean,cn_na_Rgr.mean COEFFICIENTS=1,-1 PERIODIC=NO
+cl_CR: COMBINE ARG=cn_cl_Rcr.mean,cn_cl_Rgr.mean COEFFICIENTS=1,-1 PERIODIC=NO
+
+rest_na: RESTRAINT ARG=na_CR AT=@AT@ KAPPA=0.3
+rest_cl: RESTRAINT ARG=cl_CR AT=@AT@ KAPPA=0.3
+
+PRINT STRIDE=100 ARG=cn_na_Rgr.mean,cn_cl_Rgr.mean,cn_na_Rcr.mean,cn_cl_Rcr.mean,na_CR,cl_CR,rest_na.bias,rest_cl.bias FILE=cmumd_seed_AT@AT@.out

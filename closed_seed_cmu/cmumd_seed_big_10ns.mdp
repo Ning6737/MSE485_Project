@@ -1,0 +1,39 @@
+integrator    = md
+dt            = 0.002
+nsteps        = 2500000    ; 0.2 ns
+
+continuation  = yes
+gen_vel       = no
+
+tcoupl        = V-rescale
+tc-grps       = System
+tau-t         = 0.1
+ref-t         = 350
+
+pcoupl        = Parrinello-Rahman
+pcoupltype    = isotropic
+tau-p         = 5.0
+ref-p         = 1.0
+compressibility = 4.5e-5
+
+constraints   = h-bonds
+constraint_algorithm = lincs
+lincs_iter    = 1
+lincs_order   = 4
+
+cutoff-scheme = Verlet
+nstlist       = 100
+rlist         = 1.0
+rcoulomb      = 1.0
+rvdw          = 1.0
+
+coulombtype   = PME
+pme_order     = 4
+fourierspacing = 0.12
+
+DispCorr      = EnerPres
+pbc           = xyz
+
+nstxout-compressed = 5000
+nstenergy     = 5000
+nstlog        = 5000
