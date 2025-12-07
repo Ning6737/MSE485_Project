@@ -1,0 +1,12 @@
+integrator    = steep
+emtol         = 1000
+nsteps        = 200000
+emstep        = 0.01
+constraints   = h-bonds
+lincs-order   = 4
+lincs-iter    = 2
+cutoff-scheme = Verlet
+coulombtype   = PME
+rcoulomb      = 1.0
+rvdw          = 1.0
+pbc           = xyz
